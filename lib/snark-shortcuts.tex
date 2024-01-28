@@ -1,0 +1,251 @@
+\newcommand{\Bits}{\{0,1\}}
+\newcommand{\Strings}{\Bits^{*}}
+\newcommand{\Naturals}{\mathbb{N}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Reals}{\mathbb{R}}
+\newcommand{\Integers}{\mathbb{Z}}
+\newcommand{\Probabilities}{\ClosedClosed{0}{1}}
+
+% algebra
+\newcommand{\Field}{\mathbb{F}}
+\newcommand{\F}{\Field}
+\newcommand{\Deg}{\mathrm{deg}}
+\newcommand{\Image}{\mathrm{Im}}
+
+
+% operators
+\newcommand{\Or}{\vee}
+\renewcommand{\And}{\wedge}
+\newcommand{\pST}{\; \middle| \;}
+\DeclareMathOperator{\Concat}{\; || \; }
+\newcommand{\Union}{\cup}
+\newcommand{\Intersect}{\cap}
+\newcommand{\NonZero}[1]{\lVert #1 \rVert}
+\newcommand{\ordering}[1]{\phi_{#1}}
+\newcommand{\sfrac}[2]{{#1}/{#2}}
+\newcommand{\LDE}[1]{\hat{#1}}
+\newcommand{\RLDE}[1]{\bar{#1}}
+\newcommand{\iseq}{\overset{?}{=}}
+\newcommand{\eqdef}{\ {:=} \ }
+\newcommand{\ip}[2]{\langle #1 , #2 \rangle}
+\newcommand{\Time}[1]{\mathrm{time}(#1)}
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\newcommand{\mc}{\multicolumn}
+\DeclarePairedDelimiterX{\InnerProduct}[2]{\langle}{\rangle}{#1, #2}
+\newcommand{\MultiExp}[2]{{(#1)}^{#2}}
+\newcommand{\Balance}{\mathrm{bal}}
+\newcommand{\Cut}{\mathrm{cut}}
+\newcommand{\DedupCut}{\mathrm{d}\text{-}\Cut}
+\newcommand{\Label}{{L}}
+\newcommand{\circstar}{\stackMath\mathbin{\stackinset{c}{0ex}{c}{0ex}{\ast}{\bigcirc}}}
+
+% asymptotics
+\newcommand{\negl}{\mathrm{negl}}
+
+% misc
+\newcommand{\Prob}[1]{\Pr\left[ #1 \right]}
+\newcommand{\Distribution}{\mathcal{D}}
+\newcommand{\aux}{\mathsf{aux}}
+\newcommand{\Protocol}{\Pi}
+\newcommand{\VIEW}{\mathrm{View}}
+\newcommand{\Corrupt}{\mathsf{Corrupt}}
+\newcommand{\CorruptParties}{\mathcal{C}}
+\newcommand{\AllParties}{\mathcal{P}}
+\newcommand{\HonestParties}{\mathcal{H}}
+\newcommand{\View}[2]{\VIEW^{#1}_{#2}}
+\newcommand{\Output}{\mathrm{Output}}
+\newcommand{\OutputOf}[2]{\Output^{#1}_{#2}}
+\newcommand{\RealExec}[2]{\textsc{Real}^{#1}_{#2}}
+\newcommand{\IdealExec}[2]{\textsc{Ideal}^{#1}_{#2}}
+
+
+
+% tuples with in-line math breaks
+\newcommand{\CB}{\allowbreak}
+\newcommand{\tuple}[2]{(#1 ,\CB \dots,\CB #2)}
+\newcommand{\pair}[2]{(#1 ,\CB #2)}
+\newcommand{\ppair}[2]{\left(#1 ,\CB #2\right)}
+\newcommand{\triple}[3]{(#1 ,\CB #2,\CB #3)}
+\newcommand{\ptriple}[3]{\left(#1 ,\CB #2,\CB #3\right)}
+\newcommand{\quadruple}[4]{(#1 ,\CB #2,\CB #3,\CB #4)}
+\newcommand{\pquadruple}[4]{\left(#1 ,\CB #2,\CB #3,\CB #4\right)}
+\newcommand{\quintuple}[5]{(#1 ,\CB #2,\CB #3,\CB #4,\CB #5)}
+\newcommand{\sixtuple}[6]{(#1 ,\CB #2,\CB #3,\CB #4,\CB #5,\CB #6)}
+\newcommand{\seventuple}[7]{(#1 ,\CB #2,\CB #3,\CB #4,\CB #5,\CB #6,\CB #7)}
+
+\renewcommand{\Set}[1]{\left\{#1\right\}}
+\newcommand{\MakeISet}[1]{\Set{#1_{i}}_{i = 1}^{n}}
+\newcommand{\MakeISetWithUpper}[2]{\Set{#1_{i}}_{i = 1}^{#2}}
+\NewDocumentCommand{\MakeIList}{O{1} O{n} m}{\MakeIListExplicit[#1][#2]{{#3}_{i}}}
+\NewDocumentCommand{\MakePartList}{O{1} O{k} m}{\MakeIListExplicit[#1][#2]{{#3}_{i}}}
+\NewDocumentCommand{\MakeIListExplicit}{O{1} O{n} m}{[{#3}]_{i=#1}^{#2}}
+\NewDocumentCommand{\MakeJList}{O{1} O{n} m}{\MakeIListExplicit[#1][#2]{{#3}_j}}
+\NewDocumentCommand{\MakeJListExplicit}{O{1} O{n} m}{[{#3}]_{j=#1}^{#2}}
+\newcommand{\MakeKList}[1]{[#1_{k}]_{k=1}^{p}}
+\newcommand{\MakeIJList}[1]{[#1_{k}]_{1}^{m+n}}
+\newcommand{\MakeIKJList}[1]{[#1_{k}]_{1}^{m+n+p}}
+\newcommand{\MakeLList}[1]{[#1_{i}]_{1}^{m_j}}
+
+% units
+\newcommand{\kb}{\unit{\kilo\byte}\xspace}
+\newcommand{\gb}{\unit{\giga\byte}\xspace}
+
+% generic
+\newcommand{\SecParam}{\lambda}
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\polylog}{\mathrm{polylog}}
+\newcommand{\Malicious}[1]{\tilde{#1}}
+\newcommand{\xMalicious}[1]{\expandafter \tilde#1}
+\newcommand{\MalP}{\Malicious{\mathcal{P}}}
+\newcommand{\MalB}{\Malicious{\mathcal{B}}}
+\newcommand{\MalC}{\Malicious{\mathcal{C}}}
+\newcommand{\Adversary}{\mathcal{A}}
+\newcommand{\Environment}{\mathcal{E}}
+\newcommand{\RealAdversary}{\Adversary}
+\newcommand{\IdealAdversary}{\Simulator}
+\newcommand{\AdversaryB}{\mathcal{B}}
+\newcommand{\AdversaryC}{\mathcal{C}}
+\newcommand{\Proof}{\pi}
+\newcommand{\Proofs}{\mathbb{\pi}}
+\newcommand{\EgMachine}{M}
+\newcommand{\EgTime}{t}
+\newcommand{\Circuit}{C}
+\newcommand{\ROMCircuit}{R}
+\newcommand{\ROMCircuitPartition}{\mathcal{R}}
+\newcommand{\EgCircuit}{F}
+\newcommand{\EgRecCircuit}{R}
+\newcommand{\EgRecMachine}{R}
+\newcommand{\EgInput}{z}
+\newcommand{\EgIters}{T}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% highlights
+\newcommand{\vhl}[1]{{\color{blue} #1}}
+\newcommand{\mhl}[1]{\text{\hl{$#1$}}}
+\colorlet{HidingHLColor}{blue}
+\DeclareRobustCommand{\hltext}[1]{\begingroup\color{HidingHLColor}#1\endgroup}
+\DeclareRobustCommand{\hlmath}[1]{\begingroup\color{HidingHLColor}#1\endgroup}
+
+
+\makeatletter
+\newcommand*{\@rowstyle}{}
+
+\newcommand*{\rowstyle}[1]{% sets the style of the next row
+  \gdef\@rowstyle{#1}%
+  \@rowstyle\ignorespaces%
+}
+
+\newcolumntype{=}{% resets the row style
+  >{\gdef\@rowstyle{}}%
+}
+
+\newcolumntype{+}{% adds the current row style to the next column
+  >{\@rowstyle}%
+}
+\makeatother
+
+% random oracle
+\newcommand{\ROfunc}{\rho}
+\newcommand{\ROState}{\State_\rho}
+\newcommand{\PCROfunc}{{\ROfunc_0}}
+\newcommand{\ROquery}{t}
+\newcommand{\RODistribution}[1]{\mathcal{U}(#1)}
+
+% oracle
+\newcommand{\Oracle}{\mathcal{O}}
+
+% NP relation = (index, instance, witness)
+\newcommand{\NPRelation}{\mathscr{R}}
+\newcommand{\NPLanguage}{\mathscr{L}}
+\newcommand{\NPParams}{\mathbbm{p}}
+\newcommand{\NPIndex}{\mathbbm{i}}
+\newcommand{\NPInstance}{\mathbbm{x}}
+\newcommand{\NPInstances}{\bm{x}}
+\newcommand{\NPInstanceSizeBound}{\mathsf{N}}
+\newcommand{\NPRelationWithSizeBound}{\NPRelation_{\NPInstanceSizeBound}}
+\newcommand{\NPWitness}{\mathbbm{w}}
+\newcommand{\ValidNPInstance}{\NPLanguage(\NPRelation)}
+\newcommand{\ValidNPInstanceWithSizeBound}{\NPLanguage(\NPRelationWithSizeBound)}
+\newcommand{\Yes}[1]{#1^{{\scriptscriptstyle\mathrm{YES}}}}
+\newcommand{\No}[1]{#1^{{\scriptscriptstyle\mathrm{NO}}}}
+
+% query and decision algorithms
+\newcommand{\QueryAlg}[1]{#1.\mathrm{Q}}
+\newcommand{\DecideAlg}[1]{#1.\mathrm{D}}
+
+%
+\newcommand{\PolynomialField}{\Field[\X]}
+
+% common algorithm macros
+\newcommand{\Setup}{\mathsf{Setup}}
+\newcommand{\Preprocess}{\mathsf{Preprocess}}
+\newcommand{\Multiply}{\mathsf{Multiply}}
+\newcommand{\ShareInput}{\mathsf{ShareInput}}
+\newcommand{\Evaluate}{\mathsf{Evaluate}}
+\newcommand{\Trim}{\mathsf{Trim}}
+\newcommand{\Keygen}{\mathsf{Keygen}}
+\newcommand{\Encrypt}{\mathsf{Enc}}
+\newcommand{\Decrypt}{\mathsf{Dec}}
+\newcommand{\Verify}{\mathsf{Verify}}
+\newcommand{\Commit}{\ensuremath{\mathsf{Commit}}}
+\newcommand{\InitCommit}{\mathsf{InitCommit}}
+\newcommand{\Update}{\mathsf{Update}}
+\newcommand{\Finalize}{\mathsf{Finalize}}
+\newcommand{\Sign}{\mathsf{Sign}}
+\newcommand{\Prove}{\mathsf{Prove}}
+\newcommand{\Equivocate}{\mathsf{Equivocate}}
+\newcommand{\Extract}{\mathsf{Extract}}
+
+\newcommand{\Open}{\mathsf{Open}}
+\renewcommand{\Check}{\mathsf{Check}}
+
+
+% \newcommand{\pp}{\mathsf{pp}}
+\newcommand{\ChangeMathSF}[1]{{\fontfamily{droidsans}\selectfont\sf{#1}}}
+
+% Hash function
+\newcommand{\Hash}{\Commit}
+\newcommand{\HashKey}{\mathsf{ck}}
+\newcommand{\HashKeyFinal}{\mathsf{ck}_\mathsf{final}}
+\newcommand{\HomHash}[1]{\Hash_{#1}}
+\newcommand{\COMMHomHash}[1]{\COMMCommit_{#1}}
+
+
+%Group Algebra
+\newcommand{\SampleGroup}{\mathsf{SampleGrp}}
+\newcommand{\Prime}{q}
+\newcommand{\FF}[1]{\Field_{#1}}
+\newcommand{\Group}{\mathbb{G}}
+\newcommand{\GroupOne}{\Group_1}
+\newcommand{\GroupTwo}{\Group_2}
+\newcommand{\GroupTarget}{\Group_T}
+\newcommand{\PairingSymb}{e}
+\newcommand{\Pairing}[2]{\PairingSymb(#1, #2)}
+\newcommand{\fixMSM}{\textrm{f-MSM}}
+\newcommand{\varMSM}{\textrm{v-MSM}}
+\newcommand{\FFT}{\textrm{FFT}}
+\newcommand{\IFFT}{\textrm{IFFT}}
+\newcommand{\GroupTuple}{(\GroupOne, \GroupTwo, \GroupTarget, \Prime, \GeneratorOne, \GeneratorTwo, \PairingSymb)}
+\newcommand{\PrimeGroupTuple}{(\Group, \Prime, \GeneratorOne)}
+\newcommand{\TypeIIIPairing}{\Lambda_{\SXDH}}
+\newcommand{\GroupDescription}{\langle \mathsf{group} \rangle}
+\newcommand{\Powers}{\bm{\Sigma}}
+\newcommand{\InnerCommitment}{U}
+\newcommand{\InnerSCommitment}{V}
+\newcommand{\CommitmentLeft}{\InnerCommitment}
+\newcommand{\BoldCommitment}{\bm{\Commitment}}
+\newcommand{\BoldCommitmentLeft}{\bm{\CommitmentLeft}}
+\newcommand{\CommitmentRight}{\InnerSCommitment}
+\newcommand{\BoldCommitmentRight}{\bm{\CommitmentRight}}
+\newcommand{\SCommitmentLeft}[1]{\InnerSCommitment_{#1}^{(1)}}
+\newcommand{\SCommitmentRight}[1]{\InnerSCommitment_{#1}^{(2)}}
+\newcommand{\InGOne}[1]{{\left[#1\right]}_1}
+\newcommand{\InGTwo}[1]{{\left[#1\right]}_2}
+\newcommand{\InGT}[1]{{\left[#1\right]}_T}
+
+\newcommand{\Generator}{G}
+\newcommand{\GeneratorOne}{G}
+\newcommand{\GeneratorTwo}{H}
+
+
+

@@ -1,0 +1,289 @@
+\input{lib/mincludes} %paths are relative to main.tex! 
+\input{lib/rafiboxes}
+\input{lib/modifier-shortcuts}
+\input{lib/snark-shortcuts}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Command defining commands
+\newcommand{\cmdensure}[3]{\newcommand{#1}[#2]{\ensuremath{#3}\xspace}}
+\newcommand{\cmdcal}[2]{\newcommand[#1]{\cmdensure{\mathcal{#2}}}}
+\newcommand{\cmdfrak}[2]{\newcommand[#1]{\cmdensure{\mathcal{#2}}}}
+\newcommand{\cmdsf}[2]{\newcommand[#1]{\cmdensure{\mathsf{#2}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Envieroments
+\newenvironment{out}
+{\begin{outline}[enumerate]
+}
+{ 
+    \end{outline}
+}
+
+\newenvironment{researchquestion}
+{
+    \itshape
+    \begin{center}
+    \vspace{.1em}
+}
+{
+    \end{center}
+    \vspace{.1em}
+}
+
+%solution 
+\newif\ifsol
+\newenvironment{solution}{\noindent{\bf Solution}\hspace*{1em}}{\qed\medskip}
+\soltrue
+% \solfalse
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% General Math 
+\renewcommand{\phi}{\varphi}
+\newcommand{\RM}[1]{{\mathcal{RM}_{#1}}}
+\newcommand{\qeq}{{\stackrel{?}{=}}}
+\renewcommand{\sc}[1]{{^{(#1)}}}
+\newcommand{\Support}{{\mathrm{Support}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\ZZ}[1]{\ensuremath{\Z_{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% in*  
+\cmdensure{\inpar}{1}{\left( #1 \right)}
+%\cmdensure{\inbrak}[1]{\left[ #1 \right]}
+\cmdensure{\insqr}{1}{\left[ #1 \right]}
+\cmdensure{\inabs}{1}{\left| #1 \right|}
+\cmdensure{\inset}{1}{\left\{ #1 \right\}}
+\cmdensure{\inceil}{1}{\left\lceil #1 \right\rceil}
+\cmdensure{\infloor}{1}{\left\lfloor #1 \right\rfloor}
+
+\newcommand{\suchthat}{\ensuremath{~\middle|~}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc
+\newcommand{\change}[1]{{\color{blue}#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% General Cryptography 
+
+\newcommand{\db}{\ensuremath{\mathsf{db}}\xspace}
+\newcommand{\istar}{\ensuremath{{i^*}}\xspace}
+\newcommand{\jstar}{\ensuremath{{j^*}}\xspace}
+\newcommand{\pp}{\ensuremath{\mathsf{pp}}\xspace}
+\renewcommand{\st}{\ensuremath{\mathsf{st}}\xspace}
+\newcommand{\secpar}{\ensuremath{\lambda}\xspace}
+\newcommand{\fail}{\ensuremath{\mathsf{FAIL}}\xspace}
+\newcommand{\abort}{\ensuremath{\mathsf{abort}}\xspace}
+\newcommand{\none}{\ensuremath{\mathsf{none}}\xspace}
+\newcommand{\eps}{\ensuremath{\epsilon}\xspace}
+\newcommand{\PPT}{\ensuremath{\mathsf{PPT}}\xspace}
+\newcommand{\compIndisting}{\ensuremath{\approx_c}\xspace}
+\newcommand{\vv}[1]{\ensuremath{\vec{#1}}\xspace}
+\newcommand{\nbot}{\ensuremath{\not\bot}\xspace}	
+\newcommand{\sbot}{\ensuremath{\bot^*}\xspace}	
+\newcommand{\defined}{\ensuremath{:=}}
+%functions
+\NewDocumentCommand{\invpoly}{O{n}}{
+    \ensuremath{\frac{1}{\poly(#1)}\xspace}
+    }
+    \newcommand{\notice}{\ensuremath{\mathrm{notice}}\xspace}
+    
+% parties
+\newcommand{\A}{\ensuremath{\mathcal{A}}}   %adversary 
+\newcommand{\D}{\ensuremath{\mathcal{D}}\xspace}   %distinguisher
+\renewcommand{\S}{\ensuremath{\mathcal{S}}\xspace} %simulator -- is it dangerous to renew command?
+\newcommand{\C}{\ensuremath{\mathcal{C}}\xspace}   %challneger / client
+\newcommand{\Ch}{\ensuremath{\mathcal{Ch}}\xspace}
+\newcommand{\PP}{\ensuremath{P^*}\xspace}
+
+% Encryption 
+\newcommand{\FHE}{\ensuremath{\mathsf{FHE}}\xspace} 
+\newcommand{\pk}{\ensuremath{\mathsf{pk}}\xspace} 
+\newcommand{\sk}{\ensuremath{\mathsf{sk}}\xspace} 
+
+% Proofs 
+\newcommand{\PCP}{\mathrm{PCP}}
+\newcommand{\BARG}{\mathrm{BARG}}
+\newcommand{\SNARG}{\mathsf{SNARG}}
+\newcommand{\crs}{\mathsf{crs}}
+
+
+\NewDocumentCommand{\largeProb}{m m m O{=}}{
+    \begin{equation*}
+        \Pr\insqr{#1 \;\left| \;  
+        \begin{aligned}
+            #2 
+        \end{aligned}
+        \right.} #4 #3
+    \end{equation*}
+    }
+    
+\newcommand{\diffLargeProb}[5]{
+\begin{dmath*}
+\inabs{
+    \Pr \insqr{ #1 \; \left| \;
+    \begin{aligned}
+        #2
+    \end{aligned}
+    }\right.
+    -
+    \Pr \insqr{ #3 \; \left| \;
+    \begin{aligned}
+        #4
+    \end{aligned}
+    }\right.
+    } = #5	
+\end{dmath*}
+}
+
+\newcommand{\eqLargeDist}[5]{
+    \begin{dmath*}
+        \inset{ #1 \; \left| \;
+        \begin{aligned}
+            #2
+        \end{aligned}
+        }\right.
+        #3
+        \inset{ #4 \; \left| \;
+        \begin{aligned}
+            #5
+        \end{aligned}
+        }\right.	
+    \end{dmath*}
+    }
+                    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Names we have not defined 
+\newcommand{\codingProblemUninitials}{Consistently Decodable Erasure Codes\xspace} 
+\newcommand{\nonErasureCodingProblemUninitials}{Consistently Decodable Codes\xspace} 
+\newcommand{\nonErasureCodingProblem}{Consistently Decodable Codes\xspace} 
+\newcommand{\codingProblem}{CDEC\xspace}
+\newcommand{\aPIR}{mPIR\xspace}
+%\newcommand{\OneTimeAuth}{One-Time Authentication} %we want to say that both signatures and vector commitments would work, and I haven't figured out how to say that nicely
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paper specific  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% codingProblem 
+
+% Adversary
+\newcommand{\CO}{\ensuremath{\cO_{F}}\xspace}                        % coding adversary 
+\newcommand{\CAH}{\ensuremath{\cH_{F}}\xspace}                      % honest coding adversary 
+\newcommand{\DD}{\ensuremath{D^{\CO}}\xspace}
+\newcommand{\DDH}{\ensuremath{D^{\;\CAH}}\xspace}
+\newcommand{\ns}{\ensuremath{\{\cP_q\}_{q\in [c]^t}}\xspace} 
+    \newcommand{\nsGeneral}{\ensuremath{\{\cP_q\}_{q\in D^k}}\xspace} 
+   
+    % The problem 
+    \newcommand{\codingProblemTup}{\ensuremath{(D = (\Dq, \Dd), \cC, \lambda, \delta)}\xspace}
+    \newcommand{\Enc}{\ensuremath{\mathsf{Enc}}\xspace}
+    \newcommand{\Fpm}{\ensuremath{\F_p^m}\xspace}
+    % \newcommand{\RM}[1]{\ensuremath{\mathcal{RM}_{#1}}\xspace}   
+
+    % Decoder 
+    \newcommand{\Dq}{\ensuremath{D_{\mathsf{query}}}\xspace}
+    \newcommand{\Dd}{\ensuremath{D_{\mathsf{decode}}}\xspace}
+    \newcommand{\stQ}{\ensuremath{\mathsf{st}_{q}}\xspace}             % query state
+    \newcommand{\majority}{\ensuremath{\mathrm{majority}}\xspace}
+    \newcommand{\RSdec}{\ensuremath{\mathrm{RSdec}}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (a)PIR (inputs) algorithms (outputs)
+
+ % Defined aPIR protocols
+    %\newcommand{\aPIRBoosted}{\ensuremath{\mathsf{aPIR^\star}}\xspace}
+    %\newcommand{\PiaPIRfromCodingProblem}{\ensuremath{\pi_{apirFrom\codingProblem}}\xspace}
+    \newcommand{\PIR}{\ensuremath{\mathsf{PIR}}\xspace}
+        
+    %security def
+    \newcommand{\leak}{\ensuremath{\mathsf{leak}}\xspace}
+    \newcommand{\RealExecPIR}{\ensuremath{\RealExec{}{\db, \A, \lambda, \istar, \leak}}\xspace}
+    \newcommand{\IdealExecPIR}{\ensuremath{\IdealExec{}{\db, \A, \lambda, \istar, \leak, \S}}\xspace}
+        
+    \newcommand{\PIRSetup}{\ensuremath{\mathsf{Setup}}\xspace}
+    \newcommand{\PIRPreprocess}{\ensuremath{\mathsf{Preprocess}}\xspace}
+    \newcommand{\PIRQuery}{\ensuremath{\mathsf{Query}}\xspace}
+    \newcommand{\PIRRespond}{\ensuremath{\mathsf{Respond}}\xspace}
+    \newcommand{\PIRDecode}{\ensuremath{\mathsf{Decode}}\xspace}
+    % Semantic API 
+    % Setup defined by Eran 
+    \newcommand{\Clientpp}{\ensuremath{\pp_{\mathsf{c}}}\xspace}
+    \newcommand{\Serverpp}{\ensuremath{\pp_{\mathsf{s}}}\xspace}
+
+    \newcommand{\PublicSt}{\ensuremath{\st_{\mathsf{pub}}}\xspace} % public state is the St from Preprocessing
+    \newcommand{\ServerSt}{\ensuremath{\st_{\mathsf{s}}}\xspace}
+    \newcommand{\ClientSt}{\ensuremath{\st_{\mathsf{c}}}\xspace}   % client state is the St which the client produces for itself
+    %\newcommand{\EncodedDB}{\ensuremath{E}\xspace}
+
+    
+    \newcommand{\query}{\ensuremath{\mathsf{query}}\xspace}
+    \newcommand{\response}{\ensuremath{\mathsf{resp}}\xspace}
+    \newcommand{\answer}{\ensuremath{\mathsf{ans}}\xspace}
+    \newcommand{\isFirstQuery}{\ensuremath{\mathsf{isFirstQuery}}\xspace}
+
+
+
+    \newcommand{\PIRTup}{\ensuremath{\quintuple{\Setup}{\PIRPreprocess}{\PIRQuery}{\PIRRespond}{\PIRDecode}}\xspace}
+    \newcommand{\PIRTupStar}{\ensuremath{\quintuple{\Setup^*}{\PIRPreprocess^*}{\PIRQuery^*}{\PIRRespond^*}{\PIRDecode^*}}\xspace}
+
+    \newcommand{\deapir}{\ensuremath{\mathsf{DE}\text{-}\aPIR}\xspace}
+    \newcommand{\pin}{\ensuremath{p_{\mathrm{in}}}\xspace}
+    \newcommand{\pout}{\ensuremath{p_{\mathrm{out}}}\xspace}
+    \newcommand{\PiDeaPIR}{\ensuremath{{\Pi_{\deapir}}}\xspace}
+
+    % proof of security single server
+    % \newcommand{\nPT}{\ensuremath{\cancel{\PT}}\xspace}
+    % \newcommand{\hF}{\ensuremath{\widetilde{F}}\xspace}
+    \newcommand{\CA}{\ensuremath{\C^\A_{\pp, \st}}\xspace}
+    \newcommand{\FCA}{\ensuremath{\sc{\A, \pp, \st}F}\xspace}
+    \newcommand{\nsPrime}{\ensuremath{\{\cP'_q\}_{q\in [c]^t}}\xspace} 
+    \newcommand{\nsCA}{\ensuremath{\{\sc{\CA}\cP'_q\}_{q\in [c]^t}}\xspace} 
+    \newcommand{\cOA}{\ensuremath{\sc{\A, \pp, \st}\cO}\xspace}
+    \newcommand{\ststar}{\ensuremath{\st^*}\xspace}
+    \newcommand{\ClientStstar}{\ensuremath{\ClientSt^*}\xspace}
+    \newcommand{\DOA}{\ensuremath{D^{\cOA}}\xspace}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% vector committment
+
+% algorithms
+\newcommand{\VC}{\mathsf{VC}}
+\newcommand{\VCTup}{\quadruple{\VCSetup}{\VCCommit}{\VCProve}{\VCVerify}}
+\newcommand{\VCSetup}{\Setup}
+\newcommand{\VCCommit}{\Commit}
+\newcommand{\VCProve}{\Prove}
+\newcommand{\VCVerify}{\Verify}
+
+% data structures
+\newcommand{\vk}{\mathsf{vk}}
+\newcommand{\ck}{\mathsf{ck}}
+\newcommand{\cm}{\mathsf{cm}}
+\newcommand{\dig}{\ensuremath{\mathsf{dig}}\xspace}      %used only in the introduction to explain prior work
+\newcommand{\decomMat}{\mathfrak{d}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% low degree / proximity testing 
+    
+\newcommand{\PT}{\ensuremath{\mathsf{PT}}\xspace}       %proximity tester
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Greymidrule}{\arrayrulecolor{lightgray}\midrule\arrayrulecolor{black}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% technical overview specific
+\newcommand{\basep}{\ensuremath{\mathrm{base}_p}\xspace}
