@@ -1,0 +1,275 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%/%
+% FLAGS
+%
+\newif\iffull
+\newif\ifpcipa
+
+\fulltrue
+% \fullfalse
+
+\synctex=1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffull
+  \documentclass[11pt,letterpaper]{article}
+  \usepackage[draft,notes=true,later=true]{lib/dtrt}
+  \usepackage{fullpage}
+\else
+  \documentclass[letterpaper,twocolumn,10pt]{article}
+  \usepackage{usenix}
+  \usepackage[notes=xxx,later=false]{lib/dtrt}
+  \usepackage{multicol}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACKAGES 
+\usepackage{amssymb,amsfonts,amsmath}
+\usepackage{etoolbox}
+
+\usepackage{amsthm}
+
+\usepackage{newtxtext}
+\usepackage{microtype}
+\usepackage{braket}
+\usepackage{tikz}
+  \usetikzlibrary{matrix}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{paralist}
+\usepackage{enumitem}
+  \setlist[itemize]{leftmargin=*}
+  \setlist[enumerate]{leftmargin=*}
+\usepackage[capitalise]{cleveref}
+\crefname{step}{Step}{Steps}
+\usepackage{dsfont}
+\usepackage{url}
+\usepackage{braket}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{soul}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{subcaption}
+\usepackage{setspace}
+\usepackage{tabu}
+\usepackage{colortbl}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+%\usepackage[binary-units=true]{siunitx}
+\usepackage[margin=4mm,font=small,labelfont=bf]{caption}
+\usepackage{centernot}
+\usepackage{bm}
+\usepackage{environ}
+\usepackage{stmaryrd}
+\usepackage{xspace}
+
+%%%%%%%%%%%% Matan package includes
+%\usepackage{mPackage4} 
+%BRETT(This is an include from another repo and cannot be edited, but conflicts with many of the defines in this paper)
+%MATAN(OK, I'll copy-paste what I need)
+%\usepackage[dvipsnames]{xcolor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{lib/macros}
+% \newcommand{\codingProblemUninitials}{Inconsistent Corrupt Local Decoding\xspace} 
+% \newcommand{\codingProblem}{ICLD\xspace}
+%\usepackage{changepage} % shift equation left with env adjust width
+\usepackage{breqn} % automatic line breaks in display math with env `dmath`
+\usepackage{xparse} % advanced command parsing to define overloaded \largeProb
+\usepackage{cryptocode} % for code-like experiments
+
+\newcounter{baseline}
+\setcounter{baseline}{0}
+\crefname{baseline}{Baseline}{Baselines}
+\newcommand{\baseline}[1]{
+    \refstepcounter{baseline}
+    \label{#1}
+}
+
+\newcounter{setup}
+\setcounter{setup}{0}
+\crefname{setup}{Setup}{Setups}
+\newcommand{\setup}[1]{
+    \refstepcounter{setup}
+    \label{#1}
+}
+
+
+% NOTES
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+\theoremstyle{plain} % italics
+\newtheorem{itheorem}{Theorem}%[section]
+\newtheorem{idefinition}{Definition}%[section]
+\newtheorem{icorollary}{Corollary}%[section]
+\newtheorem{ilemma}{Lemma}%[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{assumption}{Assumption}
+\newtheorem{construction}{Construction}
+
+\theoremstyle{definition} % not italics
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark} %
+\newtheorem{case}{Case}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bibliography settings
+\iffull
+\usepackage[giveninits,backend=biber,style=alphabetic,maxnames=6,maxalphanames=6]{biblatex}
+\else
+\usepackage[
+  style=alphabetic,
+  giveninits,
+  backend=biber,
+  maxalphanames=4,
+  minalphanames=3,
+  maxbibnames=15,
+]{biblatex}
+\AtEveryBibitem{%
+  \ifentrytype{inproceedings}{%
+    \clearfield{year}%
+    \clearfield{pages}%
+    \clearfield{booktitle}%
+    \clearfield{note}%
+  }{%
+  }%
+}
+\AtEveryBibitem{%
+  \ifentrytype{misc}{%
+    \clearfield{year}%
+  }{%
+  }%
+}
+\AtEveryBibitem{%
+  \ifentrytype{article}{%
+    \clearfield{pages}%
+    \clearfield{volume}%
+    \clearfield{number}%
+    \clearfield{month}%
+  }{%
+  }%
+}
+
+\DeclareFieldFormat[misc]{title}{\mkbibquote{#1\isdot}}
+
+\fi
+
+\iffull
+\bibliography{title-long,references}
+\else
+\bibliography{title-short,references}
+\fi
+
+
+\renewcommand*{\bibfont}{\small}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FORMATTING
+\allowdisplaybreaks
+\newcommand{\FormatAuthor}[3]{
+\begin{tabular}{c}
+#1 \\ {\small\texttt{#2}} \\ {\small #3}
+\end{tabular}
+}
+\newcommand{\doclearpage}{%
+  \iffull\clearpage\else\fi
+}
+\newcommand{\DoQuote}[1]{``#1''}
+\newcommand{\defemph}[1]{\textbf{\emph{#1}}}
+\newcommand{\keywords}[1]{\bigskip\par\noindent{\footnotesize\textbf{Keywords\/}: #1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\matan}[1]{\dtcolornote[Matan]{lightgray}{#1}}
+%define other author names
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{references}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Towards New-Wave Milksteaks}
+%
+\author{Authors, Matan Shtepel} %
+%don't now how to add instutite (Matan)
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{abstract}
+% %\input{abstract.tex}  
+% \end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Uncomment below for TOC
+
+% \iffull
+% \thispagestyle{empty}
+% \clearpage
+% \setcounter{tocdepth}{2}
+% \begin{spacing}{0.95}
+% {\small \tableofcontents}
+% \end{spacing} 
+% \clearpage
+% \setcounter{page}{1}
+% \else
+% \setcounter{tocdepth}{2}
+% \setcounter{page}{1}
+% \fi
+
+%\include{sections/remains-unclear}
+\include{sections/example-section}
+\appendix
+% include you appendix sections here with 
+% \include{sections/appendix-<name>}
+
+\doclearpage
+%\printbibliography
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
