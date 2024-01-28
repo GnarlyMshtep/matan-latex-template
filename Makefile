@@ -12,6 +12,7 @@ clean:
 	rm -f $(TMP)
 	rm -f sections/*.aux
 	rm paper.pdf
+	rm -rf /out
 
 SOURCE = references.bib
 TIMESTAMP_FILE = .last_ref_build_timestamp
