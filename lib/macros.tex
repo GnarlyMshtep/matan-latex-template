@@ -56,6 +56,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Envieroments
+
+\newmdenv[
+    topline=false,
+    bottomline=false,
+    rightline=false,
+    leftline=true, % Only the left line is enabled
+    linecolor=gray!40, % Light gray color for the line
+    linewidth=4pt, % Width of the line
+    leftmargin=5pt, % Indent from the left margin
+    rightmargin=10pt, % Right margin spacing
+    innertopmargin=5pt, % Space above the text inside the frame
+    innerbottommargin=5pt % Space below the text inside the frame
+]{indentedtext}
+
 \newenvironment{out}
 {\begin{outline}[enumerate]
 }
