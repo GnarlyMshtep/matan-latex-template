@@ -69,6 +69,29 @@
     innerbottommargin=5pt % Space below the text inside the frame
 ]{indentedtext}
 
+%! status does not play nice with flot yet
+\newmdenv[
+    topline=false,
+    bottomline=true,
+    rightline=false,
+    leftline=true, % Only the left line is enabled
+    linecolor=purple!40, % Light purple color for the line
+    linewidth=4pt, % Width of the line
+    leftmargin=5pt, % Indent from the left margin
+    rightmargin=10pt, % Right margin spacing
+    innertopmargin=5pt, % Space above the text inside the frame
+    innerbottommargin=10pt, % Space below the text inside the frame
+    roundcorner=10pt, % Rounded corners
+]{statusReportInternal}
+
+\newcommand{\status}[2]{
+    \begin{statusReportInternal}
+        \parhead{Status}
+        \emph{#1}
+        \par#2
+    \end{statusReportInternal}
+}
+
 \newenvironment{out}
 {\begin{outline}[enumerate]
 }
@@ -168,6 +191,7 @@
 
 \newcommand{\GeneratedBy}[1]{\ensuremath{\langle #1 \rangle}\xspace}
 \newcommand{\convolution}{\ensuremath{*}\xspace}
+\newcommand{\divides}{\ensuremath{\:|\:}\xspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
