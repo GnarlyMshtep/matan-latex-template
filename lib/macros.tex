@@ -1,6 +1,6 @@
 \input{lib/matan_includes} %paths are relative to main.tex! 
 \input{lib/modifier-shortcuts}
-\input{lib/snark-shortcuts}
+% \input{lib/snark-shortcuts}
 \input{lib/paper_specific}
 
 
@@ -39,8 +39,8 @@
 \newcommand{\status}[2]{
     \begin{statusReportInternal}
         \parhead{Status}
-        \emph{#1}
-        \par#2
+        \emph{#1}\\
+        \par\noindent #2
     \end{statusReportInternal}
 }
 
@@ -120,30 +120,58 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % General Math 
+
+%markdown
+\newcommand{\unestablished}{\XXX[unestablished]}
+
+
+%symbols
 \renewcommand{\phi}{\varphi}
+\newcommand{\eps}{\ensuremath{\epsilon}\xspace}
 \renewcommand{\emptyset}{\varnothing}
-\newcommand{\inv}{\ensuremath{{^{-1}}}\xspace}
-\newcommand{\qeq}{{\stackrel{?}{=}}}
-\renewcommand{\sc}[1]{{^{(#1)}}}
-\newcommand{\Support}{{\mathrm{Support}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\ZZ}[1]{\ensuremath{\Z_{#1}}}
-\newcommand{\Nei}{\ensuremath{\mathrm{Nbr}}}
-
-\newcommand{\Greymidrule}{\arrayrulecolor{lightgray}\midrule\arrayrulecolor{black}}
-\newcommand{\horizLine}{\noindent\textcolor[RGB]{220,220,220}{\rule{\linewidth}{2pt}}}
-\newcommand{\suchthat}{\ensuremath{~\middle|~}}
-
-
-\newcommand{\istar}{\ensuremath{i^\star}\xspace}
-\newcommand{\jstar}{\ensuremath{j^\star}\xspace}
-\newcommand{\eps}{\ensuremath{\epsilon}\xspace}
 \newcommand{\vv}[1]{\ensuremath{\vec{#1}}\xspace}
-\newcommand{\defined}{\ensuremath{:=}}
-
+\newcommand{\qeq}{{\stackrel{?}{=}}}
+\newcommand{\tensor}{\otimes}
+%
 \newcommand{\GeneratedBy}[1]{\ensuremath{\langle #1 \rangle}\xspace}
 \newcommand{\convolution}{\ensuremath{*}\xspace}
 \newcommand{\divides}{\ensuremath{\:|\:}\xspace}
+
+%decorators 
+\newcommand{\inv}{\ensuremath{{^{-1}}}\xspace}
+\renewcommand{\sc}[1]{^{(#1)}}
+\newcommand{\Support}{{\mathrm{Support}}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+
+%% graph theory
+\newcommand{\Graph}{G}
+\newcommand{\Nei}{\ensuremath{\mathrm{Nbr}}}
+\newcommand{\eigen}{\ensuremath{\lambda}\xspace}
+\newcommand{\Cayley}[2]{\mathrm{Cay}(#1, #2)}
+\newcommand{\CayleySquared}[3]{\mathrm{Cay}^2(#1, #2, #3)}
+
+
+%indexes
+\newcommand{\istar}{\ensuremath{i^\star}\xspace}
+\newcommand{\jstar}{\ensuremath{j^\star}\xspace}
+
+%styling
+\newcommand{\Greymidrule}{\arrayrulecolor{lightgray}\midrule\arrayrulecolor{black}}
+\newcommand{\horizLine}{\noindent\textcolor[RGB]{220,220,220}{\rule{\linewidth}{2pt}}}
+\newcommand{\suchthat}{\ensuremath{~\middle|~}}
+\newcommand{\defined}{\ensuremath{:=}}
+
+% Lin Algebra 
+\newcommand{\spanLA}{\ensuremath{\mathrm{span}}\xspace}
+
+
+% other math 
+\newcommand{\perm}{\pi}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -166,7 +194,7 @@
 \NewDocumentCommand{\invpoly}{O{n}}{
     \ensuremath{\frac{1}{\poly(#1)}\xspace}
     }
-    \newcommand{\notice}{\ensuremath{\mathrm{notice}}\xspace}
+\newcommand{\notice}{\ensuremath{\mathrm{notice}}\xspace}
     
 % parties
 \newcommand{\A}{\ensuremath{\mathcal{A}}}   %adversary 
@@ -208,7 +236,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Coding theory
 \newcommand{\Code}{\mathcal{C}}
+\newcommand{\TannerCode}{\mathsf{Tan}} %two args, graph and \Code_0
 \newcommand{\subCode}{\Code_{\mathsf{sub}}} %C_0 is already reserved for indexing into \Code
+
+%params
 \newcommand{\CodeLength}{n}
 \newcommand{\MesLength}{k}
 \newcommand{\QueComplexity}{\mathsf{q}}
@@ -216,3 +247,10 @@
 \newcommand{\Distance}{\ensuremath{\delta}\xspace}
 \newcommand{\fracDist}{\ensuremath{\delta}\xspace}
 \newcommand{\hamDist}{\ensuremath{\Delta}\xspace}
+
+% algorithmic 
+\newcommand{\Encode}{\ensuremath{\mathsf{Enc}}\xspace}
+\newcommand{\Decode}{\ensuremath{\mathsf{Dec}}\xspace}
+\newcommand{\PT}{\ensuremath{\mathsf{PT}}\xspace}
+
+\newcommand{\schur}{\ensuremath{\star}\xspace}
